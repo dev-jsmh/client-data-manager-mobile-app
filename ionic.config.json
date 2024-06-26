@@ -1,0 +1,7 @@
+{
+  "name": "BusinessProcessesManagerSystem",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
