@@ -10,4 +10,35 @@
       <ion-title size="large">Dashboard clientes</ion-title>
     </ion-toolbar>
   </ion-header>
+  <!--
+    show if data base has been initialized
+  -->
+  <p *ngIf="dbReady" style="color: rgb(45, 180, 45);">Data base is ready</p>
+
+  <ion-button class="ion-margin" [routerLink]="['create-new-client']" color="primary">
+    <i class="bi bi-plus-circle"></i>
+  </ion-button>
+
+  <!-- search bar -->
+  <ion-searchbar placeholder="Nombre, apellido" show-cancel-button="focus"></ion-searchbar>
+  <!-- start of the list -->
+  <ion-list *ngIf="loaded">
+
+    <ion-item *ngFor="let client of clientArray">
+      <p>{{ client.name }} {{ client.last_name }} {{ client.phone }}</p>
+      <ion-button slot="end" color="primary" (click)="viewDetails(client.id)">
+        <i class="bi bi-eye"></i>
+      </ion-button>
+    </ion-item>
+
+
+  </ion-list>
+
+  <div *ngIf="clientArray.length === 0 && loaded" class="ion-padding">No hay clientes registrados. Agregue algunos para registrarlos en la base de datos !</div>
+
+  <div *ngIf="!loaded">
+    Loading.....
+  </div>
+
+
 </ion-content>

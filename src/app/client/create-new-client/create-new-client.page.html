@@ -1,13 +1,71 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
     <ion-title>Nuevo cliente</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="ion-padding">
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">Nuevo cliente</ion-title>
     </ion-toolbar>
   </ion-header>
+  <!-- form to create a new client and register it in the data base -->
+  <form [formGroup]="registerClient" (ngSubmit)="saveClient()">
+    <div style="margin-bottom: 7px;">
+      <!-- client name -->
+      <ion-item>
+        <ion-input label="Nombre" labelPlacement="floating" formControlName="name"></ion-input>
+      </ion-item>
+      <ion-label color="danger"
+        *ngIf="registerClient.controls.name.errors?.['required'] && ( registerClient.controls.name.dirty || registerClient.controls.name.touched )">El
+        nombre es requerido
+      </ion-label>
+      <!-- client last name -->
+      <ion-item>
+        <ion-input label="Apellidos" labelPlacement="floating" formControlName="lastName"></ion-input>
+      </ion-item>
+      <ion-label color="danger"
+        *ngIf="registerClient.controls.lastName.errors?.['required'] && ( registerClient.controls.lastName.dirty || registerClient.controls.lastName.touched )">El
+        apellido es requerido
+      </ion-label>
+      <!-- client phone -->
+      <ion-item>
+        <ion-input label="Telefono" labelPlacement="floating" formControlName="phone"></ion-input>
+      </ion-item>
+      <ion-label color="danger"
+        *ngIf="registerClient.controls.phone.errors?.['required'] && ( registerClient.controls.phone.dirty || registerClient.controls.phone.touched )">El
+        teléfono es requerido
+      </ion-label>
+      <ion-label color="danger"
+        *ngIf="registerClient.controls.phone.errors?.['minlength']">El
+      numero debe tener 10 digitos
+      </ion-label>
+      <!-- client address -->
+      <ion-item>
+        <ion-input label="Dirección" labelPlacement="floating" formControlName="address"></ion-input>
+      </ion-item>
+      <ion-label color="danger"
+        *ngIf="registerClient.controls.address.errors?.['required'] && ( registerClient.controls.address.dirty || registerClient.controls.address.touched )">La
+        direction es requerida
+      </ion-label>
+      <!-- client neighborhood -->
+      <ion-item>
+        <ion-input label="Barrio" labelPlacement="floating" formControlName="neighborhood"></ion-input>
+      </ion-item>
+      <ion-label color="danger"
+        *ngIf="registerClient.controls.neighborhood.errors?.['required'] && ( registerClient.controls.neighborhood.dirty || registerClient.controls.neighborhood.touched )">El
+        nombre es requerido
+      </ion-label>
+
+    </div>
+    <div style="align-items: center;">
+      <ion-button type="submit" [disabled]="!registerClient.valid">Guardar</ion-button>
+    </div>
+
+  </form>
+
 </ion-content>

@@ -1,0 +1,37 @@
+{
+    "database": "test.db",
+    "version": 1,
+    "encrypted": false,
+    "mode": "full",
+    "tables": [
+        {
+            "name": "clients",
+            "schema": [
+                {
+                    "column": "id",
+                    "value": "INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT"
+                },
+                {
+                    "column": "name",
+                    "value": "TEXT NOT NULL"
+                },
+                {
+                    "column": "last_names",
+                    "value": "TEXT NOT NULL"
+                },
+                {
+                    "column": "address",
+                    "value": "TEXT NOT NULL"
+                },
+                {
+                    "column": "neighborhood",
+                    "value": "TEXT NOT NULL"
+                },
+                {
+                    "column": "phone",
+                    "value": "TEXT NOT NULL"
+                }
+            ]
+        }
+    ]
+}

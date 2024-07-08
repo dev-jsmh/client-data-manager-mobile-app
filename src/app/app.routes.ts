@@ -4,15 +4,12 @@ import { IndexComponent } from './client/index/index.component';
 
 export const routes: Routes = [
   {
-    path: 'home',
-    loadComponent: () => import('./home/home.page').then((m) => m.HomePage),
-  }, {
     // routes for the client module
-    path: 'clients',
-    component: IndexComponent,
+    path: 'home',
+    loadComponent: () => import('./client/index/index.component').then(m => m.IndexComponent),
     children: [
       {
-        path: 'dashboard',
+        path: '',
         component: ClientDashboardPage
       },
       {
