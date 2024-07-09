@@ -12,8 +12,7 @@ import {
   IonBackButton,
   IonButtons,
 } from '@ionic/angular/standalone';
-import { ClientDashboardPage } from '../client-dashboard/client-dashboard.page';
-import { SqliteService } from 'src/app/services/sqlite.service';
+import { AlertController } from "@ionic/angular";
 import { DatabaseService } from 'src/app/services/database.service';
 
 
@@ -45,17 +44,22 @@ export class ClientDetailsPage implements OnInit {
   public loaded: boolean = false;
 
   constructor(
+    private alertController: AlertController,
     private route: ActivatedRoute,
     private router: Router,
     private database: DatabaseService
   ) {
     this.id = this.route.snapshot.params['id'];
-    // load the client inside contructor
-    this.loadClient();
+
   }
 
   ngOnInit() {
-  }
+  };
+
+  ionViewWillEnter() {
+    // load the client inside contructor
+    this.loadClient();
+  };
 
   // load desired client 
   async loadClient() {
@@ -84,14 +88,44 @@ export class ClientDetailsPage implements OnInit {
     });
 
   };
+
+  public async showDeleteAlert() {
+
+    const alert = await this.alertController.create({
+      "animated": true,
+      "message": "¿ Esta seguro de querer eliminar la información de este clientes ?",
+      buttons: [
+        {
+          "text": "NO",
+          "role": "cancel",
+          handler: () => {
+            alert.dismiss()
+          }
+        },
+        {
+          "text": "si",
+          handler: () => {
+            this.deleteClient();
+          }
+
+        }
+      ]
+    });
+
+    // show the modal on screen
+    await alert.present();
+  }
+
   // method to delete client from data base
   public async deleteClient() {
+
     await this.database.delete(this.id).then(() => {
       this.router.navigate(["home"]);
     }
 
-    ).catch( error =>  {
-      console.warn("Something bad happends when trying to delete user id:" + this.id + " please check the database.service file or the typescript of client-details-page.");
+    ).catch(error => {
+      console.log(error),
+        console.warn("Something bad happends when trying to delete user id:" + this.id + " please check the database.service file or the typescript of client-details-page.");
     })
 
 

@@ -230,7 +230,7 @@ export class DatabaseService {
 
   // ------ update a client by id
   async updateById(id: string, data: Client) {
-    const query = "UPDATE clients set name = ?, last_name = ?, address = ?, neighborhood = ?, phone = ?";
+    const query = "UPDATE clients set name = ?, last_name = ?, address = ?, neighborhood = ?, phone = ? WHERE id = ?";
     try {
       const response = await CapacitorSQLite.run({
         database: this.DB_NAME,
@@ -240,7 +240,9 @@ export class DatabaseService {
           data.lastName,
           data.address,
           data.neighborhood,
-          data.phone
+          data.phone,
+          id
+
         ]
       });
       return response

@@ -15,14 +15,17 @@
   </ion-header>
 
   <!-- form to update client data  -->
-  <form *ngIf="loaded" [formGroup]="updateClientForm" (ngSubmit)="updateClient()">
+  <form *ngIf="loaded" [formGroup]="updateClientForm" (ngSubmit)="submitData()">
     <div style="margin-bottom: 7px;">
+      <ion-item>
+        <ion-input label="id" labelPlacement="floating" [value]="id"></ion-input>
+      </ion-item>
       <!-- client name -->
       <ion-item>
         <ion-input label="Nombre" labelPlacement="floating" formControlName="name"></ion-input>
       </ion-item>
       <ion-label color="danger"
-        *ngIf="updateClientForm.controls.name.errors?.['required'] && ( updateClientForm.controls.name.dirty || updateClientForm.controls.name.touched )">El
+        *ngIf="updateClientForm.controls['name'].errors?.['required'] && ( updateClientForm.controls['name'].dirty || updateClientForm.controls['name'].touched )">El
         nombre es requerido
       </ion-label>
       <!-- client last name -->
@@ -30,7 +33,7 @@
         <ion-input label="Apellidos" labelPlacement="floating" formControlName="lastName"></ion-input>
       </ion-item>
       <ion-label color="danger"
-        *ngIf="updateClientForm.controls.lastName.errors?.['required'] && ( updateClientForm.controls.lastName.dirty || updateClientForm.controls.lastName.touched )">El
+        *ngIf="updateClientForm.controls['lastName'].errors?.['required'] && ( updateClientForm.controls['lastName'].dirty || updateClientForm.controls['lastName'].touched )">El
         apellido es requerido
       </ion-label>
       <!-- client phone -->
@@ -38,11 +41,11 @@
         <ion-input label="Telefono" labelPlacement="floating" formControlName="phone"></ion-input>
       </ion-item>
       <ion-label color="danger"
-        *ngIf="updateClientForm.controls.phone.errors?.['required'] && ( updateClientForm.controls.phone.dirty || updateClientForm.controls.phone.touched )">El
+        *ngIf="updateClientForm.controls['phone'].errors?.['required'] && ( updateClientForm.controls['phone'].dirty || updateClientForm.controls['phone'].touched )">El
         teléfono es requerido
       </ion-label>
       <ion-label color="danger"
-        *ngIf="updateClientForm.controls.phone.errors?.['minlength']">El
+        *ngIf="updateClientForm.controls['phone'].errors?.['minlength']">El
       numero debe tener 10 digitos
       </ion-label>
       <!-- client address -->
@@ -50,7 +53,7 @@
         <ion-input label="Dirección" labelPlacement="floating" formControlName="address"></ion-input>
       </ion-item>
       <ion-label color="danger"
-        *ngIf="updateClientForm.controls.address.errors?.['required'] && ( updateClientForm.controls.address.dirty || updateClientForm.controls.address.touched )">La
+        *ngIf="updateClientForm.controls['address'].errors?.['required'] && ( updateClientForm.controls['address'].dirty || updateClientForm.controls['address'].touched )">La
         direction es requerida
       </ion-label>
       <!-- client neighborhood -->
@@ -58,15 +61,19 @@
         <ion-input label="Barrio" labelPlacement="floating" formControlName="neighborhood"></ion-input>
       </ion-item>
       <ion-label color="danger"
-        *ngIf="updateClientForm.controls.neighborhood.errors?.['required'] && ( updateClientForm.controls.neighborhood.dirty || updateClientForm.controls.neighborhood.touched )">El
+        *ngIf="updateClientForm.controls['neighborhood'].errors?.['required'] && ( updateClientForm.controls['neighborhood'].dirty || updateClientForm.controls['neighborhood'].touched )">El
         nombre es requerido
       </ion-label>
 
     </div>
     <div style="align-items: center;">
-      <ion-button type="submit" [disabled]="!updateClientForm.valid">Actualizar</ion-button>
+      <ion-button type="submit" [disabled]="!updateClientForm.valid && updateClientForm.dirty">Actualizar</ion-button>
       <ion-button (click)="goToClientDetails()"> Cancelar</ion-button>
     </div>
 
   </form>
+
+  <div *ngIf="!loaded" style="align-items: center; justify-content: center;">
+    Loading....
+  </div>
 </ion-content>
