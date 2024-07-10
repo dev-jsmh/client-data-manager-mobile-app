@@ -1,3 +1,7 @@
+# Importante
+
+Anteriormente realize un commit en el cual la aplicación no estaba terminada y tenia algunos errores. Actualmente, logre corregir muchos de ellos y terminar la aplicación, lo que me permitio compilar el código fuente del proyecto y generar el .apk deseado. Este archivo lo podra encontrar en la ruta "apk_proyecto/app-debug.apk" listo para ser instalado en su teléfono movil y probado.
+
 
 # About 
 
@@ -29,4 +33,4 @@ In this view you can watch all the information about a specific client. also it 
 
 This view has a form for updating information.
 
-Note: you will find a compiled version of the app ready to test directly on your phone in the next directory: android/app/build/intermediates/apk/debug/app-debug.apk
+Note: you will find a compiled version of the app ready to test directly on your phone in the next directory: android/app/build/outputs/apk/debug/app-debug.apk
